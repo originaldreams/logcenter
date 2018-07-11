@@ -17,7 +17,9 @@ public class LogcenterApplication {
     @Bean
     @LoadBalanced
     /**
-     * 引入RestTemplate Bean，同时重新定义其解析时用到的字符集，防止中文乱码
+     * 引入RestTemplate Bean
+     * 用来进行服务间的Http通信
+     * 同时重新定义其解析时用到的字符集，防止中文乱码
      */
     RestTemplate restTemplate(){
         RestTemplate restTemplate = new RestTemplate();
