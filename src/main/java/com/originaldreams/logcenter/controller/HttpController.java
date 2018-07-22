@@ -25,7 +25,6 @@ public class HttpController {
 
     private Logger logger = LoggerFactory.getLogger(HttpController.class);
 
-
     @RequestMapping(value = "/get",method = RequestMethod.GET)
     public ResponseEntity get(Integer id,String name){
         if(id == null || name == null){
