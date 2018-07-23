@@ -1,8 +1,8 @@
 package com.originaldreams.logcenter.controller;
 
+import com.originaldreams.logcenter.entity.EmailLog;
 import com.originaldreams.logcenter.entity.SigninLog;
-import com.originaldreams.logcenter.service.SigninLogService;
-import com.sun.javafx.collections.MappingChange;
+import com.originaldreams.logcenter.service.EmailLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -17,21 +17,21 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/signinLog")
-public class SigninLogController {
-    private Logger logger = LoggerFactory.getLogger(SigninLogController.class);
+@RequestMapping("/emailLog")
+public class EmailLogController {
+    private Logger logger = LoggerFactory.getLogger(EmailLogController.class);
 
     @Resource
-    private SigninLogService signinLogService;
+    private EmailLogService emailLogService;
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public ResponseEntity add(SigninLog entity){
+    public ResponseEntity add(EmailLog entity){
         Map<String,Object> result = new HashMap<>();
         try{
-            Integer rows = signinLogService.insert(entity);
+            Integer rows = emailLogService.insert(entity);
             result.put("code",200);
             result.put("message","SUCCESS");
-            logger.info("新增了登陆日志:"+rows+"条\t id:"+entity.getId());
+            logger.info("新增了邮件发送日志:"+rows+"条\t id:"+entity.getId());
         }catch(Exception e){
             result.put("code",500);
             result.put("message",e.getMessage());
@@ -40,23 +40,23 @@ public class SigninLogController {
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
     }
 
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public ResponseEntity list(SigninLog log,String startDate,String endDate,Integer page_num,Integer page_size){
-        Map<String,Object> result = new HashMap<>();
-
-        return  ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
-    }
-
 
     @RequestMapping(value = "/getById",method = RequestMethod.GET)
     ResponseEntity getById(Integer id){
-        SigninLog result = signinLogService.getById(id);
+        EmailLog result = emailLogService.getById(id);
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
     }
 
-    @RequestMapping(value = "/getBySigninType",method = RequestMethod.GET)
-    ResponseEntity getBySigninType(String signinType){
-        SigninLog result = signinLogService.getBySigninType(signinType);
+    @RequestMapping(value = "/getByType",method = RequestMethod.GET)
+    ResponseEntity getByType(String type){
+        EmailLog result = emailLogService.getByType(type);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
+    }
+
+
+    @RequestMapping(value = "/getByRecipients",method = RequestMethod.GET)
+    ResponseEntity getByRecipients(String recipients){
+        EmailLog result = emailLogService.getByRecipients(recipients);
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
     }
 
@@ -67,25 +67,25 @@ public class SigninLogController {
 
     @RequestMapping(value = "/getAll",method = RequestMethod.GET)
     ResponseEntity getAll(){
-        List<SigninLog> result = signinLogService.getAll();
+        List<EmailLog> result = emailLogService.getAll();
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
     }
 
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
-    ResponseEntity insert(SigninLog signinLog){
-        Integer result = signinLogService.insert(signinLog);
+    ResponseEntity insert(EmailLog emailLog){
+        Integer result = emailLogService.insert(emailLog);
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
     }
 
     @RequestMapping(value = "/deleteById",method = RequestMethod.DELETE)
     ResponseEntity deleteById(Integer id){
-        Integer result = signinLogService.deleteById(id);
+        Integer result = emailLogService.deleteById(id);
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.PUT)
-    ResponseEntity update(SigninLog signinLog){
-        Integer result = signinLogService.update(signinLog);
+    ResponseEntity update(EmailLog emailLog){
+        Integer result = emailLogService.update(emailLog);
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
     }
 

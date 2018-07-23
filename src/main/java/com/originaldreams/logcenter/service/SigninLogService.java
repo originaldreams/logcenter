@@ -1,5 +1,6 @@
 package com.originaldreams.logcenter.service;
 
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.originaldreams.logcenter.entity.SigninLog;
@@ -19,9 +20,6 @@ public class SigninLogService {
     public SigninLog getBySigninType(String signinType){
         return signinLogMapper.getBySigninType(signinType);
     }
-
-
-
 
     public List<SigninLog> getAll(){
         return signinLogMapper.getAll();

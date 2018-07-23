@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface SigninLogMapper {
-     String tableName = "signinLog";
+     String tableName = "signin_log";
 
      @Select("SELECT id, signinDate, signinUserId, signinType, signinWay, ip, signDevice FROM " + tableName + " WHERE id = #{id}")
      SigninLog getById(Integer Id);
@@ -15,7 +15,6 @@ public interface SigninLogMapper {
 
      @Select("SELECT id, signinDate, signinUserId, signinType, signinWay, ip, signDevice FROM " + tableName + " WHERE signinType = #{signinType}")
      SigninLog getBySigninType(String signinType);
-
 
 
      @Select("SELECT id, signinDate, signinUserId, signinType, signinWay, ip, signDevice FROM " + tableName)
