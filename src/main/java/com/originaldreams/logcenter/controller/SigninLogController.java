@@ -24,14 +24,20 @@ public class SigninLogController {
     @Resource
     private SigninLogService signinLogService;
 
-    @RequestMapping(value = "/add",method = RequestMethod.GET)
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
     public ResponseEntity add(SigninLog entity){
         Map<String,Object> result = new HashMap<>();
-        Integer rows = signinLogService.insert(entity);
-        result.put("rows",rows);
-        logger.info("================添加执行了================");
+        try{
+            Integer rows = signinLogService.insert(entity);
+            result.put("code",200);
+            result.put("message","SUCCESS");
+            logger.info("新增了登陆日志:"+rows+"条\t id:"+entity.getId());
+        }catch(Exception e){
+            result.put("code",500);
+            result.put("message",e.getMessage());
+            e.printStackTrace();
+        }
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
-
     }
 
     @RequestMapping(value = "/getLogList",method = RequestMethod.GET)

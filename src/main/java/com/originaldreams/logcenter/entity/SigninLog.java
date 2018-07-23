@@ -11,7 +11,7 @@ public class SigninLog {
     /**
     * 登录时间
     */
-     private Date signinDate;
+     private String signinDate;
     /**
     * 登录用户id
     */
@@ -38,13 +38,16 @@ public class SigninLog {
      public void setId(Integer id){
            this.id = id;
      }
-     public Date getSigninDate(){
-           return this.signinDate;
-     }
-     public void setSigninDate(Date signinDate){
-           this.signinDate = signinDate;
-     }
-     public String getSigninUserId(){
+
+    public String getSigninDate() {
+        return signinDate;
+    }
+
+    public void setSigninDate(String signinDate) {
+        this.signinDate = signinDate;
+    }
+
+    public String getSigninUserId(){
            return this.signinUserId;
      }
      public void setSigninUserId(String signinUserId){
