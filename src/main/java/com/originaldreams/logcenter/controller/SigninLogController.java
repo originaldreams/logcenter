@@ -1,5 +1,8 @@
 package com.originaldreams.logcenter.controller;
 
+import com.originaldreams.common.response.MyResponse;
+import com.originaldreams.common.response.MyServiceResponse;
+import com.originaldreams.common.router.MyRouter;
 import com.originaldreams.logcenter.entity.SigninLog;
 import com.originaldreams.logcenter.service.SigninLogService;
 import com.sun.javafx.collections.MappingChange;
@@ -10,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -20,29 +25,32 @@ import java.util.Map;
 @RequestMapping("/signinLog")
 public class SigninLogController {
     private Logger logger = LoggerFactory.getLogger(SigninLogController.class);
+    RestTemplate restTemplate;
 
     @Resource
     private SigninLogService signinLogService;
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public ResponseEntity add(SigninLog entity){
-        Map<String,Object> result = new HashMap<>();
+        MyServiceResponse response =new MyServiceResponse();
         try{
             Integer rows = signinLogService.insert(entity);
-            result.put("code",200);
-            result.put("message","SUCCESS");
+            response.setSuccess(MyServiceResponse.success_code_success);
+//            response.setMessage("SUCCESS");
             logger.info("新增了登陆日志:"+rows+"条\t id:"+entity.getId());
         }catch(Exception e){
-            result.put("code",500);
-            result.put("message",e.getMessage());
             e.printStackTrace();
+            return MyResponse.serverError();
         }
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
+        return MyResponse.ok(response);
     }
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public ResponseEntity list(SigninLog log,String startDate,String endDate,Integer page_num,Integer page_size){
         Map<String,Object> result = new HashMap<>();
+
+        // TODO  多重条件，以及分页查询
+
 
         return  ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
     }

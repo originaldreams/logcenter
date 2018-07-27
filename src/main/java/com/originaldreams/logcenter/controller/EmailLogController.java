@@ -1,5 +1,7 @@
 package com.originaldreams.logcenter.controller;
 
+import com.originaldreams.common.response.MyResponse;
+import com.originaldreams.common.response.MyServiceResponse;
 import com.originaldreams.logcenter.entity.EmailLog;
 import com.originaldreams.logcenter.entity.SigninLog;
 import com.originaldreams.logcenter.service.EmailLogService;
@@ -26,18 +28,17 @@ public class EmailLogController {
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public ResponseEntity add(EmailLog entity){
-        Map<String,Object> result = new HashMap<>();
+        MyServiceResponse response =new MyServiceResponse();
         try{
             Integer rows = emailLogService.insert(entity);
-            result.put("code",200);
-            result.put("message","SUCCESS");
+            response.setSuccess(MyServiceResponse.success_code_success);
+//            response.setMessage("SUCCESS");
             logger.info("新增了邮件发送日志:"+rows+"条\t id:"+entity.getId());
         }catch(Exception e){
-            result.put("code",500);
-            result.put("message",e.getMessage());
             e.printStackTrace();
+            return MyResponse.serverError();
         }
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
+        return MyResponse.ok(response);
     }
 
 
