@@ -39,7 +39,6 @@ public interface SigninLogMapper {
      )
      List<SigninLog> getListByCondition(Map params);
 
-
      @Insert("INSERT INTO " + tableName + "(id, signinDate, signinUserId, signinType, signinWay, ip, signDevice) VALUES (#{id}, #{signinDate}, #{signinUserId}, #{signinType}, #{signinWay}, #{ip}, #{signDevice})")
      @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
      Integer insert(SigninLog signinLog);
@@ -49,6 +48,18 @@ public interface SigninLogMapper {
 
      @Update("UPDATE " + tableName + " SET signinDate=#{signinDate}, signinUserId=#{signinUserId}, signinType=#{signinType}, signinWay=#{signinWay}, ip=#{ip}, signDevice=#{signDevice} WHERE id = #{id}")
      Integer update(SigninLog signinLog);
+
+    @Update("CREATE TABLE `"+tableName+"_"+"${days}` (" +
+            "  `id` int(10) NOT NULL AUTO_INCREMENT," +
+            "  `signinDate` varchar(30) DEFAULT NULL COMMENT '登录时间'," +
+            "  `signinUserId` int(10) NOT NULL COMMENT '登录用户id'," +
+            "  `signinType` varchar(10) DEFAULT 'SIGNIN' COMMENT '登录类型'," +
+            "  `signinWay` varchar(255) DEFAULT NULL COMMENT '登录方式'," +
+            "  `IP` varchar(15) DEFAULT NULL COMMENT '登录时的ip'," +
+            "  `signDevice` varchar(255) DEFAULT NULL COMMENT '登录设备'," +
+            "  PRIMARY KEY (`id`)" +
+            ") ENGINE=InnoDB DEFAULT CHARSET=utf8;")
+    Integer createNewTableByDate(@Param("days") String days);
 
 
 }
