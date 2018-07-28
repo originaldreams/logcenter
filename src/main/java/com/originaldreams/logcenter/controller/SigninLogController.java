@@ -47,12 +47,21 @@ public class SigninLogController {
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public ResponseEntity list(SigninLog log,String startDate,String endDate,Integer page_num,Integer page_size){
-        Map<String,Object> result = new HashMap<>();
-
-        // TODO  多重条件，以及分页查询
-
-
-        return  ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
+        Map<String,Object> params = new HashMap<>();
+        MyServiceResponse response =new MyServiceResponse();
+        if(page_num!=null||page_size!=null){
+            Integer offset=(page_num-1)*page_size;
+            params.put("offset",offset);
+            params.put("rows",page_size);
+        }else{
+            params.put("offset",0);
+            params.put("rows",10);
+        }
+        params.put("startDate",startDate);
+        params.put("endDate",endDate);
+        params.put("entity",log);
+        response.setData(signinLogService.getListByCondition(params));
+        return MyResponse.ok(response);
     }
 
 

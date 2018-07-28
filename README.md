@@ -28,9 +28,10 @@ data|Object|业务执行结果 参照具体应答的参数说明
 message|String|业务执行失败时的错误信息
 
 + 注意
-	1.本接口文档的所有接口均为Http请求格式，在使用接口时，应当先判断http返回码
-	3.仅当http返回码为200且success=0时，说明业务处理成功。此时应关注data字段返回的业务数据
-	4.当http返回码为其他，或http返回码200但success=1时，说明业务处理失败。此时应关注message字段给出的错误提示
+
+1 本接口文档的所有接口均为Http请求格式，在使用接口时，应当先判断http返回码
+2 仅当http返回码为200且success=0时，说明业务处理成功。此时应关注data字段返回的业务数据
+3 当http返回码为其他，或http返回码200但success=1时，说明业务处理失败。此时应关注message字段给出的错误提示
 
 
 ## 1 登录日志
@@ -52,16 +53,14 @@ message|String|业务执行失败时的错误信息
 
 + 应答
 
-| 字段名 | 变量名 | 必填 | 类型 | 示例值 | 描述 |
-|:-----:|:-----:|:---:|:----:|:-----:|:---:|
-| 状态码 | code | 是 | Integer | 200 | 此字段是通信标识 |
-| 系统消息 | Message | 是 | String | SUCCESS | 程序成功以及异常信息 |
+| 字段名 | 变量名 |  类型 |描述 |
+|:-----:|:-----:|:---:|:---:|
 
 + 响应示例
 ```
 {
-    code:200,
-    Message:"SUCCESS"
+    "success": 0,
+    "message": null
 }
 ```
 
@@ -70,9 +69,50 @@ message|String|业务执行失败时的错误信息
 + 接口名称：查找用户登录日志
 + 接口地址：/signinLog/list
 + 请求方式：GET
-+ 请求
++ 请求参数
 
-  
+| 字段名 | 变量名 | 必填 | 类型 | 示例值 | 描述 |
+|:-----:|:-----:|:---:|:----:|:-----:|:---:|
+| 登录时间 | startDate | 否 | String | 2018-05-05 12:33:00 | 以登录时间筛选 |
+| 登录时间 | endDate | 否 | String | 2018-05-05 12:33:00 | 以登录时间筛选 |
+| 登录用户id | signinUserId | 否 | String | kabshkfbssefsefsebf | 以登录的用户的id筛选 |
+| 登录类型 | signinType | 否 | String | SIGNIN/SIGNOUT | 以登录类型筛选 |
+| 登录方式 | signinWay | 否 | String |  | 以登录方式筛选 |
+| 登录时的ip | ip | 否 | String | 192.168.3.125 | 以登录的用户的ip地址筛选 |
+| 登录设备 | signDevice | 否 | String |  | 以登录的用户的设备筛选 |
+
++ 应答
+
+| 字段名 | 变量名 |类型 | 描述 |
+|:-----:|:-----:|:-----:|:---:|
+| 日志的id | id |  String |   |
+| 登录时间 | signinDate |  String |   |
+| 登录用户的id | signinUserId | String |  |
+| 登录类型 | signinType |  String |   |
+| 登录方式 | signinWay |  String |  |
+| 登录时的ip | ip |  String |   |
+| 登录设备 | signDevice |  String |   |
+
++ 响应示例
+```
+{
+    "success": 0,
+    "data": [
+        {
+            "id": 1,
+            "signinDate": "2018-07-23 12:47:00",
+            "signinUserId": "1",
+            "signinType": "SIGNIN",
+            "signinWay": "web登入",
+            "ip": "127.0.0.1",
+            "signDevice": "apple"
+        },......        
+    ],
+    "message": null
+}
+```
+
+
 ## 2 邮件日志
 ### 2.1 记录邮件发送日志
 + 接口名称：记录邮件发送日志
@@ -90,16 +130,16 @@ message|String|业务执行失败时的错误信息
 
 + 返回参数
 
-| 字段名 | 变量名 | 必填 | 类型 | 示例值 | 描述 |
-|:-----:|:-----:|:---:|:----:|:-----:|:---:|
-| 状态码 | code | 是 | Integer | 200 | 此字段是通信标识 |
-| 系统消息 | Message | 是 | String | SUCCESS | 程序成功以及异常信息 |
+| 字段名 | 变量名 | 类型 | 描述 |
+|:-----:|:-----:|:-----:|:---:|
+
+
 
 + 响应示例
 ```
 {
-    code:200,
-    Message:"SUCCESS"
+    "success": 0,
+    "message": null
 }
 ```
 
@@ -108,4 +148,37 @@ message|String|业务执行失败时的错误信息
 + 接口地址：/signinLog/list
 + 请求方式：GET
 + 请求参数
- 
+
+| 字段名 | 变量名 | 必填 | 类型 | 示例值 | 描述 |
+|:-----:|:-----:|:---:|:----:|:-----:|:---:|
+| 收件人 | recipients | 否 | String | donwilliamlone@gmail.com | 以邮箱地址查找 |
+| 发送时间 | startDate | 否 | String | 2018-05-01 12:21:00 | 发送时间的起始查找 |
+| 截止时间 | endDate | 否 | String | 2018-05-01 12:21:00 | 发送时间的截止查找 |
+
++ 返回参数
+
+| 字段名 | 变量名 | 类型 |  描述 |
+|:---:|:---:|:---:|:---:|
+| 邮件发送类型 | type |  String  | 邮件发送类型 |
+| 收件人 | recipients |  String |  收件人的邮箱地址 |
+| 标题 | title |  String |   |
+| 内容 | content |  String |   |
+| 发送时间 | sendDate | String | 发送的时间 |
+
++ 响应示例
+```
+{
+    "success": 0,
+    "data": [
+        {
+            "id": 1,
+            "type": "type",
+            "recipients": "donwilliamlone@gmail.com",
+            "title": "邮箱验证",
+            "content": "请您立刻检出邮件内的链接",
+            "sendDate": "2018-05-01 12:21:00"
+        }
+    ],
+    "message": null
+}
+```

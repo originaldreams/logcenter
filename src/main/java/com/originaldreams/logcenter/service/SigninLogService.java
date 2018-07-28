@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.originaldreams.logcenter.entity.SigninLog;
 import com.originaldreams.logcenter.mapper.SigninLogMapper;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SigninLogService {
@@ -37,5 +38,8 @@ public class SigninLogService {
         return signinLogMapper.update(signinLog);
     }
 
+    public List<SigninLog> getListByCondition(Map params){
+        return signinLogMapper.getListByCondition(params);
+    }
 
 }

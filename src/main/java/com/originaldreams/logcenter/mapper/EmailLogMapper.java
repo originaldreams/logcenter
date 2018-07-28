@@ -1,6 +1,7 @@
 package com.originaldreams.logcenter.mapper;
 
 import com.originaldreams.logcenter.entity.EmailLog;
+import com.originaldreams.logcenter.entity.SigninLog;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -8,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.*;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface EmailLogMapper {
@@ -25,6 +27,22 @@ public interface EmailLogMapper {
      @Select("SELECT id, type, recipients, title, content, sendDate FROM " + tableName + " WHERE recipients = #{recipients}")
      EmailLog getByRecipients(String recipients);
 
+
+     @Select("<script>" +
+             " SELECT * " +
+             " FROM " +
+             tableName +
+             " <where> " +
+             "<if test=\"entity != null and entity.type != null\"> AND type= #{entity.type}  </if>" +
+             "<if test=\"entity != null and entity.title != null\"> AND title= #{entity.title}  </if>" +
+             "<if test=\"entity != null and entity.recipients != null\"> AND recipients= #{entity.recipients}  </if>" +
+             "<if test=\"startDate != null\"> AND sendDate &gt; #{startDate}  </if>" +
+             "<if test=\"endDate != null\"> AND sendDate  &lt; #{endDate}  </if>" +
+             " </where> " +
+             " LIMIT  #{offset},#{rows}" +
+             "</script>"
+     )
+     List<EmailLog> getListByCondition(Map params);
 
 
      @Select("SELECT id, type, recipients, title, content, sendDate FROM " + tableName)

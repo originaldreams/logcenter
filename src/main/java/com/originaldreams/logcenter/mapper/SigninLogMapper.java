@@ -4,6 +4,7 @@ import com.originaldreams.logcenter.entity.SigninLog;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface SigninLogMapper {
@@ -19,6 +20,25 @@ public interface SigninLogMapper {
 
      @Select("SELECT id, signinDate, signinUserId, signinType, signinWay, ip, signDevice FROM " + tableName)
      List<SigninLog> getAll();
+
+
+     @Select("<script>" +
+             " SELECT * " +
+             " FROM " +
+             tableName +
+             " <where> " +
+             "<if test=\"entity != null and entity.signinType != null\"> AND signinType= #{entity.signinType}  </if>" +
+             "<if test=\"entity != null and entity.signinWay != null\"> AND signinWay= #{entity.signinWay}  </if>" +
+             "<if test=\"entity != null and entity.ip != null\"> AND ip= #{entity.ip}  </if>" +
+             "<if test=\"entity != null and entity.signinUserId != null\"> AND signinUserId= #{entity.signinUserId}  </if>" +
+             "<if test=\"startDate != null\"> AND signinDate &gt; #{startDate}  </if>" +
+             "<if test=\"endDate != null\"> AND signinDate  &lt; #{endDate}  </if>" +
+             " </where> " +
+             " LIMIT  #{offset},#{rows}" +
+             "</script>"
+     )
+     List<SigninLog> getListByCondition(Map params);
+
 
      @Insert("INSERT INTO " + tableName + "(id, signinDate, signinUserId, signinType, signinWay, ip, signDevice) VALUES (#{id}, #{signinDate}, #{signinUserId}, #{signinType}, #{signinWay}, #{ip}, #{signDevice})")
      @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")

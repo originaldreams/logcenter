@@ -42,6 +42,26 @@ public class EmailLogController {
     }
 
 
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    public ResponseEntity list(EmailLog log,String startDate,String endDate,Integer page_num,Integer page_size) {
+        Map<String, Object> params = new HashMap<>();
+        MyServiceResponse response = new MyServiceResponse();
+        if (page_num != null || page_size != null) {
+            Integer offset = (page_num - 1) * page_size;
+            params.put("offset", offset);
+            params.put("rows", page_size);
+        } else {
+            params.put("offset", 0);
+            params.put("rows", 10);
+        }
+        params.put("startDate", startDate);
+        params.put("endDate", endDate);
+        params.put("entity", log);
+        response.setData(emailLogService.getListByCondition(params));
+        return MyResponse.ok(response);
+    }
+
+
     @RequestMapping(value = "/getById",method = RequestMethod.GET)
     ResponseEntity getById(Integer id){
         EmailLog result = emailLogService.getById(id);
