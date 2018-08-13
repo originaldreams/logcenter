@@ -33,7 +33,7 @@ public class ScheduledTask {
     EmailLogService emailLogService;
 
 
-//    @Scheduled(cron = "0/30 * * * * ?")
+    @Scheduled(cron = "0 1 * * * ?")
     public void createNewTable() throws ParseException {
         //TODO   定时创建表，后天和大后天的表
         updateTableDaily("sign");

@@ -18,6 +18,10 @@ public interface TableMaintenanceMapper {
      @Select("SELECT id, table_type, table_create_day, table_name FROM " + tableName + " WHERE id = #{id}")
      TableMaintenance getById(Integer Id);
 
+ /**
+  * @param params
+  * @return
+  */
      @Select("SELECT * FROM " + tableName +" WHERE table_type=#{table_type} ORDER BY table_create_day DESC LIMIT 1")
      TableMaintenance getLastestTable(Map params);
 
