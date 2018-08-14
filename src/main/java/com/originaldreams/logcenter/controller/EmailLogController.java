@@ -31,7 +31,7 @@ public class EmailLogController {
         MyServiceResponse response =new MyServiceResponse();
         try{
             Integer rows = emailLogService.insert(entity);
-            response.setSuccess(MyServiceResponse.success_code_success);
+            response.setSuccess(MyServiceResponse.SUCCESS_CODE_SUCCESS);
 //            response.setMessage("SUCCESS");
             logger.info("新增了邮件发送日志:"+rows+"条\t id:"+entity.getId());
         }catch(Exception e){
