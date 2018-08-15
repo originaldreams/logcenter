@@ -2,10 +2,8 @@ package com.originaldreams.logcenter.controller;
 
 import com.originaldreams.common.response.MyResponse;
 import com.originaldreams.common.response.MyServiceResponse;
-import com.originaldreams.common.router.MyRouter;
 import com.originaldreams.logcenter.entity.SigninLog;
 import com.originaldreams.logcenter.service.SigninLogService;
-import com.sun.javafx.collections.MappingChange;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -13,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
@@ -35,7 +32,7 @@ public class SigninLogController {
         MyServiceResponse response =new MyServiceResponse();
         try{
             Integer rows = signinLogService.insert(entity);
-            response.setSuccess(MyServiceResponse.success_code_success);
+            response.setSuccess(MyServiceResponse.SUCCESS_CODE_SUCCESS);
 //            response.setMessage("SUCCESS");
             logger.info("新增了登陆日志:"+rows+"条\t id:"+entity.getId());
         }catch(Exception e){

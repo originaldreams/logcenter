@@ -5,7 +5,7 @@
 
     <groupId>com.originaldreams</groupId>
     <artifactId>logcenter</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
     <name>logcenter</name>
@@ -50,6 +50,13 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.originaldreams</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.2</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
