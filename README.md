@@ -38,18 +38,18 @@ message|String|业务执行失败时的错误信息
 ### 1.1 记录用户登录日志
 
 + 接口名称：记录用户登录日志
-+ 接口地址：/signinLog/add
++ 接口地址：/logonLog/add
 + 请求方式：POST
 + 请求参数
 
 | 字段名 | 变量名 | 必填 | 类型 | 示例值 | 描述 |
 |:-----:|:-----:|:---:|:----:|:-----:|:---:|
-| 登录时间 | signinDate | 是 | String | 2018-05-05 12:33:00 | 登录的时间 |
-| 登录用户id | signinUserId | 是 | String | kabshkfbssefsefsebf | 登录的用户的id |
-| 登录类型 | signinType | 是 | String | SIGNIN/SIGNOUT | 登录类型有两种：登入/登出 |
-| 登录方式 | signinWay | 是 | String |  | 登录方式 |
+| 登录时间 | createDatetime | 是 | String | 2018-05-05 12:33:00 | 登录的时间 |
+| 登录用户id | userId | 是 | String | kabshkfbssefsefsebf | 登录的用户的id |
+| 登录类型 | type | 是 | String | SIGNIN/SIGNOUT | 登录类型有两种：登入/登出 |
+| 登录方式 | way | 是 | String |  | 登录方式 |
 | 登录时的ip | ip | 是 | String | 192.168.3.125 | 登录的用户的ip地址 |
-| 登录设备 | signDevice | 是 | String |  | 登录的用户的设备 |
+| 登录设备 | deviceId | 是 | String |  | 登录的用户的设备 |
 
 + 应答
 
@@ -67,7 +67,7 @@ message|String|业务执行失败时的错误信息
 
 ### 1.2 查找用户登录日志
 + 接口名称：查找用户登录日志
-+ 接口地址：/signinLog/list
++ 接口地址：/logonLog/list
 + 请求方式：GET
 + 请求参数
 
@@ -75,23 +75,23 @@ message|String|业务执行失败时的错误信息
 |:-----:|:-----:|:---:|:----:|:-----:|:---:|
 | 登录时间 | startDate | 否 | String | 2018-05-05 12:33:00 | 以登录时间筛选 |
 | 登录时间 | endDate | 否 | String | 2018-05-05 12:33:00 | 以登录时间筛选 |
-| 登录用户id | signinUserId | 否 | String | kabshkfbssefsefsebf | 以登录的用户的id筛选 |
-| 登录类型 | signinType | 否 | String | SIGNIN/SIGNOUT | 以登录类型筛选 |
-| 登录方式 | signinWay | 否 | String |  | 以登录方式筛选 |
+| 登录用户id | userId | 否 | String | kabshkfbssefsefsebf | 以登录的用户的id筛选 |
+| 登录类型 | type | 否 | String | SIGNIN/SIGNOUT | 以登录类型筛选 |
+| 登录方式 | way | 否 | String |  | 以登录方式筛选 |
 | 登录时的ip | ip | 否 | String | 192.168.3.125 | 以登录的用户的ip地址筛选 |
-| 登录设备 | signDevice | 否 | String |  | 以登录的用户的设备筛选 |
+| 登录设备 | deviceId | 否 | String |  | 以登录的用户的设备筛选 |
 
 + 应答
 
 | 字段名 | 变量名 |类型 | 描述 |
 |:-----:|:-----:|:-----:|:---:|
 | 日志的id | id |  String |   |
-| 登录时间 | signinDate |  String |   |
-| 登录用户的id | signinUserId | String |  |
-| 登录类型 | signinType |  String |   |
-| 登录方式 | signinWay |  String |  |
+| 登录时间 | createDatetime |  String |   |
+| 登录用户的id | userId | String |  |
+| 登录类型 | type |  String |   |
+| 登录方式 | way |  String |  |
 | 登录时的ip | ip |  String |   |
-| 登录设备 | signDevice |  String |   |
+| 登录设备 | deviceId |  String |   |
 
 + 响应示例
 ```
@@ -100,12 +100,12 @@ message|String|业务执行失败时的错误信息
     "data": [
         {
             "id": 1,
-            "signinDate": "2018-07-23 12:47:00",
-            "signinUserId": "1",
-            "signinType": "SIGNIN",
-            "signinWay": "web登入",
+            "createDatetime": "2018-07-23 12:47:00",
+            "userId": "1",
+            "type": "SIGNIN",
+            "way": "web登入",
             "ip": "127.0.0.1",
-            "signDevice": "apple"
+            "deviceId": "apple"
         },......        
     ],
     "message": null
@@ -145,7 +145,7 @@ message|String|业务执行失败时的错误信息
 
 ### 2.2 查找邮件发送日志
 + 接口名称：查找用户登录日志
-+ 接口地址：/signinLog/list
++ 接口地址：/logonLog/list
 + 请求方式：GET
 + 请求参数
 

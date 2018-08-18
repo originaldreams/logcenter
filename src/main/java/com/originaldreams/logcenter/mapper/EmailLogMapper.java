@@ -1,7 +1,6 @@
 package com.originaldreams.logcenter.mapper;
 
 import com.originaldreams.logcenter.entity.EmailLog;
-import com.originaldreams.logcenter.entity.SigninLog;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
