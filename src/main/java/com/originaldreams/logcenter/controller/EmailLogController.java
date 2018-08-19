@@ -3,7 +3,6 @@ package com.originaldreams.logcenter.controller;
 import com.originaldreams.common.response.MyResponse;
 import com.originaldreams.common.response.MyServiceResponse;
 import com.originaldreams.logcenter.entity.EmailLog;
-import com.originaldreams.logcenter.entity.SigninLog;
 import com.originaldreams.logcenter.service.EmailLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

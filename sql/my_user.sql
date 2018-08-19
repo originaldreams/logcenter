@@ -40,12 +40,12 @@ INSERT INTO `email_log` VALUES ('1', 'type', 'donwilliamlone@gmail.com', '邮箱
 DROP TABLE IF EXISTS `signin_log`;
 CREATE TABLE `signin_log` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `signinDate` varchar(30) DEFAULT NULL COMMENT '登录时间',
-  `signinUserId` int(10) NOT NULL COMMENT '登录用户id',
-  `signinType` varchar(10) DEFAULT 'SIGNIN' COMMENT '登录类型',
-  `signinWay` varchar(255) DEFAULT NULL COMMENT '登录方式',
+  `createDatetime` varchar(30) DEFAULT NULL COMMENT '登录时间',
+  `userId` int(10) NOT NULL COMMENT '登录用户id',
+  `type` varchar(10) DEFAULT 'SIGNIN' COMMENT '登录类型',
+  `way` varchar(255) DEFAULT NULL COMMENT '登录方式',
   `IP` varchar(15) DEFAULT NULL COMMENT '登录时的ip',
-  `signDevice` varchar(255) DEFAULT NULL COMMENT '登录设备',
+  `deviceId` varchar(255) DEFAULT NULL COMMENT '登录设备',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
@@ -64,12 +64,12 @@ INSERT INTO `signin_log` VALUES ('5', '2018-07-23 12:47:00', '1', 'SIGNIN', 'web
 DROP TABLE IF EXISTS `signin_log_2018-07-29`;
 CREATE TABLE `signin_log_2018-07-29` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `signinDate` varchar(30) DEFAULT NULL COMMENT '登录时间',
-  `signinUserId` int(10) NOT NULL COMMENT '登录用户id',
-  `signinType` varchar(10) DEFAULT 'SIGNIN' COMMENT '登录类型',
-  `signinWay` varchar(255) DEFAULT NULL COMMENT '登录方式',
+  `createDatetime` varchar(30) DEFAULT NULL COMMENT '登录时间',
+  `userId` int(10) NOT NULL COMMENT '登录用户id',
+  `type` varchar(10) DEFAULT 'SIGNIN' COMMENT '登录类型',
+  `way` varchar(255) DEFAULT NULL COMMENT '登录方式',
   `IP` varchar(15) DEFAULT NULL COMMENT '登录时的ip',
-  `signDevice` varchar(255) DEFAULT NULL COMMENT '登录设备',
+  `deviceId` varchar(255) DEFAULT NULL COMMENT '登录设备',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -83,12 +83,12 @@ CREATE TABLE `signin_log_2018-07-29` (
 DROP TABLE IF EXISTS `signin_log_2018-07-30`;
 CREATE TABLE `signin_log_2018-07-30` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `signinDate` varchar(30) DEFAULT NULL COMMENT '登录时间',
-  `signinUserId` int(10) NOT NULL COMMENT '登录用户id',
-  `signinType` varchar(10) DEFAULT 'SIGNIN' COMMENT '登录类型',
-  `signinWay` varchar(255) DEFAULT NULL COMMENT '登录方式',
+  `createDatetime` varchar(30) DEFAULT NULL COMMENT '登录时间',
+  `userId` int(10) NOT NULL COMMENT '登录用户id',
+  `type` varchar(10) DEFAULT 'SIGNIN' COMMENT '登录类型',
+  `way` varchar(255) DEFAULT NULL COMMENT '登录方式',
   `IP` varchar(15) DEFAULT NULL COMMENT '登录时的ip',
-  `signDevice` varchar(255) DEFAULT NULL COMMENT '登录设备',
+  `deviceId` varchar(255) DEFAULT NULL COMMENT '登录设备',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
