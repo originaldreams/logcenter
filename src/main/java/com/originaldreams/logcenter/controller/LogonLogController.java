@@ -1,5 +1,7 @@
 package com.originaldreams.logcenter.controller;
 
+import com.originaldreams.common.response.MyResponse;
+import com.originaldreams.common.response.MyServiceResponse;
 import com.originaldreams.logcenter.entity.LogonLog;
 import com.originaldreams.logcenter.service.LogonLogService;
 import org.slf4j.Logger;
@@ -12,7 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
-
+/**
+ * @author 董晨龙
+ * @date 2018-08-15 10:05:40
+ */
 @RestController
 @RequestMapping("/logonLog")
 public class LogonLogController {
@@ -20,6 +25,23 @@ public class LogonLogController {
 
     @Resource
     private LogonLogService logonLogService;
+
+    @RequestMapping(value = "/insert",method = RequestMethod.POST)
+    ResponseEntity insert(LogonLog logonLog){
+        MyServiceResponse response =new MyServiceResponse();
+        try{
+            Integer rows = logonLogService.insert(logonLog);
+            response.setSuccess(MyServiceResponse.SUCCESS_CODE_SUCCESS);
+            logger.info("新增了登陆日志:"+rows+"条\t id:"+logonLog.getId());
+        }catch(Exception e){
+            e.printStackTrace();
+            return MyResponse.serverError();
+        }
+        return MyResponse.ok(response);
+    }
+
+
+
 
     @RequestMapping(value = "/getById",method = RequestMethod.GET)
     ResponseEntity getById(Integer id){
@@ -51,11 +73,7 @@ public class LogonLogController {
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
     }
 
-    @RequestMapping(value = "/insert",method = RequestMethod.POST)
-    ResponseEntity insert(LogonLog logonLog){
-        Integer result = logonLogService.insert(logonLog);
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(result);
-    }
+
 
     @RequestMapping(value = "/deleteById",method = RequestMethod.DELETE)
     ResponseEntity deleteById(Integer id){

@@ -11,6 +11,10 @@ public class LogonLogService {
     @Autowired
     private LogonLogMapper logonLogMapper;
 
+    public Integer insert(LogonLog logonLog){
+        return logonLogMapper.insert(logonLog);
+    }
+
     public LogonLog getById(Integer id){
 
         return logonLogMapper.getById(id);
@@ -31,9 +35,7 @@ public class LogonLogService {
         return logonLogMapper.getAll();
     }
 
-    public Integer insert(LogonLog logonLog){
-        return logonLogMapper.insert(logonLog);
-    }
+
 
     public Integer deleteById(Integer id){
         return logonLogMapper.deleteById(id);
