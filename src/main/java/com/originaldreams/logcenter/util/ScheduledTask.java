@@ -1,8 +1,7 @@
 package com.originaldreams.logcenter.util;
 
-import com.originaldreams.logcenter.entity.TableMaintenance;
 import com.originaldreams.logcenter.service.EmailLogService;
-import com.originaldreams.logcenter.service.LogonLogService1;
+import com.originaldreams.logcenter.service.LogonLogService;
 import com.originaldreams.logcenter.service.TableMaintenanceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
 
 
 /**
@@ -27,7 +24,7 @@ public class ScheduledTask {
     @Autowired
     TableMaintenanceService maintenanceService;
     @Autowired
-    LogonLogService1 logonLogService;
+    LogonLogService logonLogService;
     @Autowired
     EmailLogService emailLogService;
 
