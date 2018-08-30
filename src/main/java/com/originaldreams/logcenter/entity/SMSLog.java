@@ -37,6 +37,10 @@ public class SMSLog {
     */
      private String statusCode;
     /**
+     * 状态 0 正常  1 已使用
+     */
+    private int state = 0;
+    /**
     * 时间
     */
      private Date createTime = new Date();
@@ -95,11 +99,27 @@ public class SMSLog {
            this.createTime = createTime;
      }
 
+    public int getState() {
+        return state;
+    }
 
-@Override
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    @Override
     public String toString() {
         return "SMSLog{" +
-            "  id:" + id + "  phone:" + phone + "  type:" + type + "  templateId:" + templateId + "  codeStr:" + codeStr + "  minuteStr:" + minuteStr + "  result:" + result + "  stateCode:" + statusCode + "  createTime:" + createTime +
-        "}";
+                "id=" + id +
+                ", phone='" + phone + '\'' +
+                ", type=" + type +
+                ", templateId='" + templateId + '\'' +
+                ", codeStr='" + codeStr + '\'' +
+                ", minuteStr='" + minuteStr + '\'' +
+                ", result='" + result + '\'' +
+                ", statusCode='" + statusCode + '\'' +
+                ", state=" + state +
+                ", createTime=" + createTime +
+                '}';
     }
-  }
+}
