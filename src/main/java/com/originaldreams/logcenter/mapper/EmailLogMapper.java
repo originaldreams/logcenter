@@ -14,6 +14,35 @@ import java.util.Map;
 public interface EmailLogMapper {
     String tableName = "email_log";
 
+ /**
+  * 根据邮箱，查询最新的一条可用的验证码
+  * @param email
+  * @return
+  */
+ @Select(" SELECT id,type,email,title,content,code,result,statusCode,createTime " +
+            " FROM " + tableName +
+            " WHERE email = #{email} AND statusCode = 0 AND state = 0 " +
+            " ORDER BY createTime DESC LIMIT 1")
+    EmailLog getByEmail(String email);
+
+ /**
+  * 将验证码状态修改为已使用
+  * @param id
+  * @return
+  */
+ @Update("UPDATE " + tableName + " SET state = 1 WHERE id = #{id}")
+ Integer update(Integer id);
+
+ /**
+  * 添加验证码
+  * @param emailLog
+  * @return
+  */
+ @Insert(" INSERT INTO " + tableName + "(type, email, title, content, code,result,statusCode,state,createTime) " +
+         " VALUES (#{type}, #{email}, #{title}, #{content}, #{code},#{result},#{statusCode},#{state},#{createTime})")
+ @Options(useGeneratedKeys = true)
+ Integer insert(EmailLog emailLog);
+
 
      @Select("SELECT id, type, recipients, title, content, sendDate FROM " + tableName + " WHERE id = #{id}")
      EmailLog getById(Integer Id);
@@ -47,15 +76,6 @@ public interface EmailLogMapper {
      @Select("SELECT id, type, recipients, title, content, sendDate FROM " + tableName)
      List<EmailLog> getAll();
 
-     @Insert("INSERT INTO " + tableName + "(id, type, recipients, title, content, sendDate) VALUES (#{id}, #{type}, #{recipients}, #{title}, #{content}, #{sendDate})")
-     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-     Integer insert(EmailLog emailLog);
-
-     @Delete("DELETE FROM " + tableName + " WHERE id = #{id}")
-     Integer deleteById(Integer id);
-
-     @Update("UPDATE " + tableName + " SET type=#{type}, recipients=#{recipients}, title=#{title}, content=#{content}, sendDate=#{sendDate} WHERE id = #{id}")
-     Integer update(EmailLog emailLog);
 
 
 }

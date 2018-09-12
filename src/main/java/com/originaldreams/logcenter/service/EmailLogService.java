@@ -1,5 +1,6 @@
 package com.originaldreams.logcenter.service;
 
+import com.originaldreams.common.response.MyServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.originaldreams.logcenter.entity.EmailLog;
@@ -11,6 +12,12 @@ import java.util.Map;
 public class EmailLogService {
     @Autowired
     private EmailLogMapper emailLogMapper;
+
+    public MyServiceResponse insert(EmailLog emailLog){
+        emailLogMapper.insert(emailLog);
+        return new MyServiceResponse(emailLog.getId());
+    }
+
 
     public EmailLog getById(Integer id){
 
@@ -32,17 +39,6 @@ public class EmailLogService {
         return emailLogMapper.getAll();
     }
 
-    public Integer insert(EmailLog emailLog){
-        return emailLogMapper.insert(emailLog);
-    }
-
-    public Integer deleteById(Integer id){
-        return emailLogMapper.deleteById(id);
-    }
-
-    public Integer update(EmailLog emailLog){
-        return emailLogMapper.update(emailLog);
-    }
 
     public List<EmailLog> getListByCondition(Map params){
         return emailLogMapper.getListByCondition(params);

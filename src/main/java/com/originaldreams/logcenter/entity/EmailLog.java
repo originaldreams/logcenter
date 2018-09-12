@@ -1,7 +1,6 @@
 package com.originaldreams.logcenter.entity;
 
 import java.util.Date;
-import java.util.List;
 
 public class EmailLog {
     /**
@@ -11,11 +10,11 @@ public class EmailLog {
     /**
     * 邮件发送类型
     */
-     private String type;
+     private Integer type;
     /**
     * 收件人
     */
-     private String recipients;
+     private String email;
     /**
     * 标题
     */
@@ -25,51 +24,116 @@ public class EmailLog {
     */
      private String content;
     /**
-    * 发送时间
+     * 验证码
+     * 包含验证码的邮件，需要将验证码单独填写，方便查询
     */
-     private String sendDate;
-     public Integer getId(){
-           return this.id;
-     }
-     public void setId(Integer id){
-           this.id = id;
-     }
-     public String getType(){
-           return this.type;
-     }
-     public void setType(String type){
-           this.type = type;
-     }
-     public String getRecipients(){
-           return this.recipients;
-     }
-     public void setRecipients(String recipients){
-           this.recipients = recipients;
-     }
-     public String getTitle(){
-           return this.title;
-     }
-     public void setTitle(String title){
-           this.title = title;
-     }
-     public String getContent(){
-           return this.content;
-     }
-     public void setContent(String content){
-           this.content = content;
-     }
-     public String getSendDate(){
-           return this.sendDate;
-     }
-     public void setSendDate(String sendDate){
-           this.sendDate = sendDate;
-     }
+     private String code;
 
 
-@Override
+     private String result;
+
+     private int statusCode;
+
+    /**
+     * 状态码
+     * 0 未用过
+     * 1 已用过
+     */
+    private int state = 0;
+
+     private Date createTime = new Date();
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+    @Override
     public String toString() {
         return "EmailLog{" +
-            "  id:" + id + "  type:" + type + "  recipients:" + recipients + "  title:" + title + "  content:" + content + "  sendDate:" + sendDate + 
-        "}";
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", email='" + email + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", code='" + code + '\'' +
+                ", result='" + result + '\'' +
+                ", statusCode=" + statusCode +
+                ", createTime=" + createTime +
+                '}';
     }
-  }
+}
